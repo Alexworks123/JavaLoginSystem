@@ -161,8 +161,8 @@
                                   <Component id="btnDelete" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="txtID" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtUsername" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtPassword" alignment="0" min="-2" pref="283" max="-2" attributes="0"/>
+                              <Component id="txtUser" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtPass" alignment="0" min="-2" pref="283" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -191,11 +191,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                  <Component id="txtUsername" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtUser" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtPassword" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPass" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -247,9 +247,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtID">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtPassword">
+        <Component class="javax.swing.JTextField" name="txtPass">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtUsername">
+        <Component class="javax.swing.JTextField" name="txtUser">
         </Component>
         <Component class="javax.swing.JButton" name="btnAdd">
           <Properties>

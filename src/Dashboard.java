@@ -68,8 +68,8 @@ public void showAccounts() {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
-        txtUsername = new javax.swing.JTextField();
+        txtPass = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -187,8 +187,8 @@ public void showAccounts() {
                                 .addGap(35, 35, 35)
                                 .addComponent(btnDelete))
                             .addComponent(txtID)
-                            .addComponent(txtUsername)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUser)
+                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(177, 177, 177)
@@ -210,11 +210,11 @@ public void showAccounts() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addGap(8, 8, 8)
-                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
@@ -258,10 +258,57 @@ public void showAccounts() {
         this.dispose();
 
 
-        // TODO add your handling code here:
+   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+                                      
+    //  Get the data from your text fields
+    String id = txtID.getText();
+    String firstName = txtUser.getText();
+    String lastName = txtPass.getText();
+
+    //  Simple Validation: Don't allow empty fields
+    if (id.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "All fields are required!");
+        return;
+    }
+
+    
+    try {
+        // Connect to the DB
+        Connection con = DBConnection.getConnection();
+        
+        if (con != null) {
+            // SQL query to insert into your 'students' table
+            String sql = "INSERT INTO students (student_id, firstname, lastname) VALUES (?, ?, ?)";
+            PreparedStatement pst = con.prepareStatement(sql);
+            
+            // Link the variables to the '?' in the SQL string
+            pst.setString(1, id);
+            pst.setString(2, firstName);
+            pst.setString(3, lastName);
+
+            int result = pst.executeUpdate();
+
+            if (result > 0) {
+                JOptionPane.showMessageDialog(this, "Student added successfully!");
+                
+                // Clear the text fields for the next entry
+                txtID.setText("");
+                txtUser.setText("");
+                txtPass.setText("");
+                
+                // Refresh the table so the new student appears
+                showAccounts(); 
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Connection failed. Check XAMPP/MySQL.");
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
+
 
   
 
@@ -310,7 +357,7 @@ public void showAccounts() {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable stdTable;
     private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtUsername;
+    private javax.swing.JTextField txtPass;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
